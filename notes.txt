@@ -1,4 +1,0 @@
-What is bower npm?
-
-Should I run this command for console table? --> bower install console.table --save
-(listed in their documentation for installation)
