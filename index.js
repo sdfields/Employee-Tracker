@@ -15,7 +15,7 @@ function track() {
         },
     ])
     .then((choice) => {
-        const userSelect = choice
+        const {userSelect} = choice
         switch (userSelect) {
         case 'Add Employee':
             addEmployee()
@@ -23,27 +23,51 @@ function track() {
         case 'View Employees':
             viewEmployees()
             break;
-        case 'Add Role'
+        case 'Add Role':
             addRole()
             break;
-        case 'View Roles'
-            addRole()
+        case 'View Roles':
+            viewRoles()
             break;
-        case 'Update Role'
-            addRole()
+        case 'Update Role':
+            updateRole()
             break;
-        case 'Add Deparment'
-            addRole()
+        case 'Add Deparment':
+            addDepartment()
             break;
-        case 'View Departments'
-            addRole()
+        case 'View Departments':
+            viewDepartments()
             break;
         }
     })
 }
 
-track();
-
-addEmployee() {
+function addEmployee() {
     console.log('Employee Added!')
 }
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+function addEmployee() {
+    console.log('Employee Added!')
+}
+
+track();
