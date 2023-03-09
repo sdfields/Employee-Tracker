@@ -48,31 +48,38 @@ function track() {
 }
 
 function addEmployee() {
-    console.log('Employee Added!')
+    console.log('Employee Added!');
+    track();
 };
 
 function viewEmployees() {
-    console.log('View Employees!')
+    console.log('View Employees!');
+    track();
 };
 
 function addRole() {
-    console.log('Role Added!')
+    console.log('Role Added!');
+    track();
 };
 
 function viewRoles() {
-    console.log('View Roles!')
+    console.log('View Roles!');
+    track();
 };
 
 function updateRole() {
-    console.log('Role Updated!')
+    console.log('Role Updated!');
+    track();
 };
 
 function addDepartment() {
-    console.log('Department Added!')
+    console.log('Department Added!');
+    track();
 };
 
 function viewDepartments() {
-    console.log('View Departments!')
+    console.log('View Departments!');
+    track();
 };
 
 track();
