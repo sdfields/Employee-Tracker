@@ -1,11 +1,16 @@
+// Variables for necessary dependencies
+
 const connection = require('./config/connection');
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consoleTable = require('console.table');
 
-function track() {
-    console.log('Welcome to Employee Tracker!')
+// Main function to run the tracker
 
+function track() {
+    // Welcome Message
+    console.log('Welcome to Employee Tracker!')
+    // Using Inquirer to prompt user selection
     inquirer.prompt([
         {
         type: 'list',
@@ -32,7 +37,7 @@ function track() {
         case 'Update Role':
             updateRole()
             break;
-        case 'Add Deparment':
+        case 'Add Department':
             addDepartment()
             break;
         case 'View Departments':
@@ -44,30 +49,30 @@ function track() {
 
 function addEmployee() {
     console.log('Employee Added!')
-}
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function viewEmployees() {
+    console.log('View Employees!')
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function addRole() {
+    console.log('Role Added!')
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function viewRoles() {
+    console.log('View Roles!')
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function updateRole() {
+    console.log('Role Updated!')
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function addDepartment() {
+    console.log('Department Added!')
+};
 
-function addEmployee() {
-    console.log('Employee Added!')
-}
+function viewDepartments() {
+    console.log('View Departments!')
+};
 
 track();
