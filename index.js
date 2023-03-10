@@ -42,24 +42,69 @@ function track() {
             break;
         case 'View Departments':
             viewDepartments()
+            .then(function ([res]) {
+                console.table(res)
+                track();
+            }) .catch(function (err) {
+                console.log(err);
+            })
             break;
         }
     })
 }
 
 function addEmployee() {
-    console.log('Employee Added!');
-    track();
+    console.log('Employee Added!')
 };
 
 function viewEmployees() {
-    console.log('View Employees!');
-    track();
+    connection.query('SELECT * FROM employees', function (err, res) {
+        if (err) {
+            console.log(err)
+        } 
+        console.table(res)
+        track();
+    });
 };
 
 function addRole() {
-    console.log('Role Added!');
-    track();
+    viewDepartments()
+    .then(function ([res]) {
+        console.log(res)
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'title',
+                message: 'What is the title of the role you are adding?'
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary of the role you are adding?'
+            },
+            {   
+                type: 'list',
+                name: 'deptSelect',
+                message: 'Please select from the options below:',
+                choices: res.map(function (dept) {
+                    return {
+                        value: dept.id,
+                        name: dept.department_name,
+                    }
+                }),
+            },
+        ]).then( function (answers) {
+            connection.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [answers.title, answers.salary, answers.deptSelect], function (err) {
+                if (err) {
+                console.log(err)
+                } else {
+                track();
+                }
+            }) 
+        })
+    }) .catch(function (err) {
+        console.log(err);
+    })
 };
 
 function viewRoles() {
@@ -78,8 +123,7 @@ function addDepartment() {
 };
 
 function viewDepartments() {
-    console.log('View Departments!');
-    track();
+    return connection.promise().query('SELECT * FROM departments')
 };
 
 track();
