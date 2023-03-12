@@ -10,7 +10,7 @@ SELECT * FROM employees;
 
 /* Add Role */
 
-INSERT INTO roles SET ?
+INSERT INTO roles (title, salary, department_id)
 
 /* View Roles */
 
