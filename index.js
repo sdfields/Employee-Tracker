@@ -81,7 +81,7 @@ function track() {
 // Finish this function
 
 function addEmployee() {
-  viewRoles()
+  viewEmployees()
   .then(function ([res]) {
     console.table(res);
     inquirer
@@ -113,8 +113,8 @@ function addEmployee() {
           message: "Please select the employees manager below:",
           choices: res.map(function (employees) {
             return {
-              value: `${employees.manager_id}`,
-              name: `${employees.first_name} ${employees.last_name}` ,
+              value: employees.manager_id,
+              name: `${employees.first_name} ${employees.last_name}`
             };
           }),
         },
