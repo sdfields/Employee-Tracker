@@ -28,6 +28,7 @@ function track() {
         ],
       },
     ])
+    // Switch case with error functions for the view functions
     .then((choice) => {
       const { userSelect } = choice;
       switch (userSelect) {
@@ -80,9 +81,9 @@ function track() {
 // Finish this function
 
 function addEmployee() {
-  viewDepartments()
+  viewRoles()
   .then(function ([res]) {
-    console.log(res);
+    console.table(res);
     inquirer
       .prompt([
         {
@@ -99,29 +100,29 @@ function addEmployee() {
           type: "list",
           name: "role_id",
           message: "Please select the employees role below:",
-          choices: res.map(function (role) {
+          choices: res.map(function (roles) {
             return {
-              value: role.id,
-              name: role.title,
+              value: `${roles.id}`,
+              name: `${roles.title}`,
             };
           }),
         },
         {
           type: "list",
           name: "manager_id",
-          message: "Please select the employees role below:",
-          choices: res.map(function (role) {
+          message: "Please select the employees manager below:",
+          choices: res.map(function (employees) {
             return {
-              value: role.id,
-              name: role.title,
+              value: `${employees.manager_id}`,
+              name: `${employees.first_name} ${employees.last_name}` ,
             };
           }),
         },
       ])
       .then(function (answers) {
         connection.query(
-          "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)",
-          [answers.title, answers.salary, answers.deptSelect],
+          "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+          [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
           function (err) {
             if (err) {
               console.log(err);
@@ -135,17 +136,19 @@ function addEmployee() {
   .catch(function (err) {
     console.log(err);
   });
-}
+};
+
+// Function called to view the employees in the database
 
 function viewEmployees() {
-  return connection.promise().query("SELECT * FROM employees")
+  return connection.promise().query("SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name AS departments, roles.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees manager on manager.id = employees.manager_id;")
   };
 
 
 function addRole() {
   viewDepartments()
     .then(function ([res]) {
-      console.log(res);
+      console.table(res);
       inquirer
         .prompt([
           {
@@ -164,8 +167,8 @@ function addRole() {
             message: "Please select the department from the options below:",
             choices: res.map(function (dept) {
               return {
-                value: dept.id,
-                name: dept.department_name,
+                value: `${dept.id}`,
+                name: `${dept.department_name}`,
               };
             }),
           },
@@ -190,6 +193,8 @@ function addRole() {
     });
 }
 
+// // Function called to view the roles in the database
+
 function viewRoles() {
   return connection.promise().query("SELECT * FROM roles");
 }
@@ -201,7 +206,7 @@ function updateRole() {
   track();
 }
 
-// Finish this function
+// Function called to add a department to the database
 
 function addDepartment() {
   viewDepartments()
@@ -215,8 +220,8 @@ function addDepartment() {
             message: "What is the name of the department you are adding?",
             choices: res.map(function (dept) {
               return {
-                value: dept.id,
-                name: dept.department_name,
+                value: `${dept.id}`,
+                name: `${dept.department_name}`,
               };
             }),
           },
@@ -241,8 +246,12 @@ function addDepartment() {
     });
 }
 
+// Function called to view the departments in the database
+
 function viewDepartments() {
   return connection.promise().query("SELECT * FROM departments");
 }
+
+// Calling the init function track
 
 track();

@@ -1,4 +1,4 @@
-/* List of query */
+/* List of example query for reference */
 
 /* Add Employee */
 
