@@ -259,7 +259,7 @@ function updateRole() {
           console.log(err);
         } else {
           console.log("***********************************");
-          console.log("***      Role Updated!      ***");
+          console.log("***        Role Updated!        ***");
           console.log("***********************************");
           track();
         }
