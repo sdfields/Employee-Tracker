@@ -155,7 +155,7 @@ function viewEmployees() {
   return connection
     .promise()
     .query(
-      "SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name AS departments, roles.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees manager on manager.id = employees.manager_id;"
+      "SELECT employees.first_name, employees.last_name, roles.id, roles.title, departments.department_name, roles.salary, employees.manager_id FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id"
     );
 }
 
@@ -181,10 +181,10 @@ function addRole() {
             type: "list",
             name: "deptSelect",
             message: "Please select the department from the options below:",
-            choices: res.map(function (dept) {
+            choices: res.map(function (departments) {
               return {
-                value: `${dept.id}`,
-                name: `${dept.department_name}`,
+                value: `${departments.id}`,
+                name: `${departments.department_name}`,
               };
             }),
           },
@@ -217,7 +217,7 @@ function viewRoles() {
   return connection
     .promise()
     .query(
-      "SELECT roles.title, roles.salary, departments.department_name FROM roles LEFT JOIN departments on roles.department_id = departments.id"
+      "SELECT roles.title, roles.salary, departments.id, departments.department_name FROM roles LEFT JOIN departments on roles.department_id = departments.id"
     );
 }
 
@@ -241,7 +241,7 @@ function updateRole() {
       },
       {
         type: "list",
-        name: "role_id",
+        name: "roleUpdate",
         message: "Please select the employees role below:",
         choices: res.map(function (roles) {
           return {
@@ -252,8 +252,8 @@ function updateRole() {
       },
     ])
     .then(function (answers) {
-      connection.query('UPDATE employees SET role_id = ? WHERE id = ?', 
-      [answers.role_id, answers.employeeSelect], 
+      connection.query('UPDATE employees SET employees.role_id = ? WHERE employees.id = ?', 
+      [answers.roleUpdate, answers.employeeSelect], 
       function (err) {
         if (err) {
           console.log(err);
