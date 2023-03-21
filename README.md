@@ -42,5 +42,6 @@ MIT License
 
 https://github.com/sdfields/Employee-Tracker
 
-## Example Video
+## Video Example
 
+chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/e84460da-eada-4a44-yef9-880c14ac6b24  
