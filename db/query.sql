@@ -18,7 +18,7 @@ SELECT * FROM roles;
 
 /* Update Role */
 
-
+UPDATE employees SET employees.role_id = ? WHERE employees.id = ?
 
 /* Add Department */
 
