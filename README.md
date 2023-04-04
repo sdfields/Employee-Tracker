@@ -44,4 +44,4 @@ https://github.com/sdfields/Employee-Tracker
 
 ## Video Example
 
-chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/e84460da-eada-4a44-yef9-880c14ac6b24  
+https://drive.google.com/file/d/1UA_R6OM5Lq-LyEG8gF907SdW5_iBsrvS/view
